@@ -6,12 +6,20 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		ADA0614F2EFF35CD006146AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADA0614E2EFF35CD006146AE /* GoogleService-Info.plist */; };
+		ADA061522EFF36B5006146AE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = ADA061512EFF36B5006146AE /* FirebaseAuth */; };
+		ADA061572EFF3718006146AE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = ADA061562EFF370E006146AE /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		AD43216D2EFEC737003D938B /* deckflow-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "deckflow-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADA0614E2EFF35CD006146AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ADA061562EFF370E006146AE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		AD43216F2EFEC737003D938B /* deckflow-ios */ = {
+		ADA0616A2EFF40A8006146AE /* deckflow-ios */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "deckflow-ios";
 			sourceTree = "<group>";
@@ -23,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA061522EFF36B5006146AE /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,8 +41,10 @@
 		AD4321642EFEC737003D938B = {
 			isa = PBXGroup;
 			children = (
-				AD43216F2EFEC737003D938B /* deckflow-ios */,
+				ADA061562EFF370E006146AE /* .gitignore */,
+				ADA0614E2EFF35CD006146AE /* GoogleService-Info.plist */,
 				AD43216E2EFEC737003D938B /* Products */,
+				ADA0616A2EFF40A8006146AE /* deckflow-ios */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,10 +72,11 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				AD43216F2EFEC737003D938B /* deckflow-ios */,
+				ADA0616A2EFF40A8006146AE /* deckflow-ios */,
 			);
 			name = "deckflow-ios";
 			packageProductDependencies = (
+				ADA061512EFF36B5006146AE /* FirebaseAuth */,
 			);
 			productName = "deckflow-ios";
 			productReference = AD43216D2EFEC737003D938B /* deckflow-ios.app */;
@@ -94,6 +106,9 @@
 			);
 			mainGroup = AD4321642EFEC737003D938B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				ADA061502EFF36B5006146AE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AD43216E2EFEC737003D938B /* Products */;
 			projectDirPath = "";
@@ -109,6 +124,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA061572EFF3718006146AE /* .gitignore in Resources */,
+				ADA0614F2EFF35CD006146AE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +345,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ADA061502EFF36B5006146AE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ADA061512EFF36B5006146AE /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADA061502EFF36B5006146AE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AD4321652EFEC737003D938B /* Project object */;
 }
