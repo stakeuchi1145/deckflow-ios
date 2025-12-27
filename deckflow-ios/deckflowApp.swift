@@ -17,13 +17,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
 }
 
+enum Route {
+    case login
+    case home
+}
+
 @main
-struct deckflow_iosApp: App {
+struct deckflowApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {
         WindowGroup {
-            LoginScreenView()
+            RootView()
         }
     }
 }

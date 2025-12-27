@@ -9,16 +9,16 @@ import FirebaseAuth
 
 class LoginRepository {
     static var shared = LoginRepository()
-    
-    func login(email: String, password: String) async throws -> String {
-        do {
-            let result = try await Auth.auth().signIn(withEmail: email, password: password)
-            
-            return try await result.user.getIDTokenResult().token
-        } catch {
-            debugPrint(error)
-        }
 
-        return ""
+    let apiService = APIService.shared
+
+    func login(email: String, password: String) async throws -> String {
+        let result = try await Auth.auth().signIn(withEmail: email, password: password)
+        
+        return try await result.user.getIDTokenResult().token
+    }
+    
+    func getUser(token: String) async throws -> String {
+        return try await apiService.getUserInfo(token: token).displayName
     }
 }

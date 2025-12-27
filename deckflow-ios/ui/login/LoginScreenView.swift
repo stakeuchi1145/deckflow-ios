@@ -10,10 +10,12 @@ import Combine
 
 struct LoginScreenView: View {
     @ObservedObject var viewModel: LoginViewModel = LoginViewModel.shared
+    let onNavigate: (Route) -> Void
 
     @FocusState var focusedUserId: Bool
     @FocusState var focusedPassword: Bool
     @State var isLoading: Bool = false
+    @State var isLogin: Bool = false
 
     var body: some View {
         ZStack {
@@ -44,7 +46,7 @@ struct LoginScreenView: View {
                         .onChange(of: focusedUserId) {
                             viewModel.onChangeIsLogin()
                         }
-                        .onChange(of: viewModel.password) {
+                        .onChange(of: viewModel.userId) {
                             viewModel.onChangeIsLogin()
                         }
                 }
@@ -87,7 +89,7 @@ struct LoginScreenView: View {
                             }
                     } else {
                         TextField("パスワードを入力してください。", text: $viewModel.password)
-                            .textContentType(.emailAddress)
+                            .textContentType(.password)
                             .keyboardType(.asciiCapableNumberPad)
                             .padding()
                             .background(.white)
@@ -122,9 +124,14 @@ struct LoginScreenView: View {
                 Button(action: {
                     Task {
                         isLoading = true
+                        isLogin = false
 
                         do {
-                            let _ = try await viewModel.login()
+                            if try await viewModel.login() {
+                                onNavigate(.home)
+                            } else {
+                                isLogin = true
+                            }
                         } catch {
                             debugPrint(error)
                         }
@@ -143,6 +150,14 @@ struct LoginScreenView: View {
                 }
                 .disabled(!viewModel.isLogin)
                 .padding(.top, 40)
+
+                if isLogin {
+                    Text("ログインに失敗しました。")
+                        .font(.system(size: 18))
+                        .fontWeight(.semibold)
+                        .foregroundColor(.red)
+                        .padding()
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
 
@@ -169,5 +184,6 @@ struct LoginScreenView: View {
 }
 
 #Preview {
-    LoginScreenView()
+    LoginScreenView() { test in
+    }
 }
