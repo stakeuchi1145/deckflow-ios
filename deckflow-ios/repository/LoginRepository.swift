@@ -1,0 +1,24 @@
+//
+//  LoginRepository.swift
+//  deckflow-ios
+//
+//  Created by shin takeuchi on 2025/12/27.
+//
+
+import FirebaseAuth
+
+class LoginRepository {
+    static var shared = LoginRepository()
+    
+    func login(email: String, password: String) async throws -> String {
+        do {
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            
+            return try await result.user.getIDTokenResult().token
+        } catch {
+            debugPrint(error)
+        }
+
+        return ""
+    }
+}

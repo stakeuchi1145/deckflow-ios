@@ -23,7 +23,7 @@ struct deckflow_iosApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LoginScreen()
+            LoginScreenView()
         }
     }
 }
