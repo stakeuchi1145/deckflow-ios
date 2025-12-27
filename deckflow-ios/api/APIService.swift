@@ -12,7 +12,7 @@ final class APIService {
     static let shared = APIService()
 
     private let decoder = JSONDecoder()
-    let env = ProcessInfo.processInfo.environment
+    private let env = ProcessInfo.processInfo.environment
 
     private func baseURLString() throws -> String {
         guard let value = env["BASE_API_URL"],

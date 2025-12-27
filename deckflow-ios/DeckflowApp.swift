@@ -23,7 +23,7 @@ enum Route {
 }
 
 @main
-struct deckflowApp: App {
+struct DeckflowApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
     var body: some Scene {

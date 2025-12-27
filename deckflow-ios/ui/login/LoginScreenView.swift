@@ -184,6 +184,6 @@ struct LoginScreenView: View {
 }
 
 #Preview {
-    LoginScreenView() { test in
+    LoginScreenView() { _ in
     }
 }

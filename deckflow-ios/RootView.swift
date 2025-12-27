@@ -17,12 +17,10 @@ struct RootView: View {
             }
             .navigationDestination(for: Route.self) { route in
                 switch route {
-                case .login:
-                    LoginScreenView() { route in
-                        path = [route]
-                    }
                 case .home:
                     HomeScreenView()
+                default:
+                    EmptyView()
                 }
             }
         }
