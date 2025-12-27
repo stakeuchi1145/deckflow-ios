@@ -1,3 +1,4 @@
 GoogleService-Info.plist
 deckflow-ios.xcodeproj/project.xcworkspace/xcshareddata/
-Env-*
+deckflow-ios.xcodeproj
+deckflow-ios.xcodeproj/*
