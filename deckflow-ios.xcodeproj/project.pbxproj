@@ -6,13 +6,48 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AD86C7D22EFFCA02000B5A02 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AD86C7D12EFFCA02000B5A02 /* Alamofire */; };
+		ADA0614F2EFF35CD006146AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADA0614E2EFF35CD006146AE /* GoogleService-Info.plist */; };
+		ADA061522EFF36B5006146AE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = ADA061512EFF36B5006146AE /* FirebaseAuth */; };
+		ADA061572EFF3718006146AE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = ADA061562EFF370E006146AE /* .gitignore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AD86C7E12EFFD06F000B5A02 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		AD43216D2EFEC737003D938B /* deckflow-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "deckflow-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADA0614E2EFF35CD006146AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ADA061562EFF370E006146AE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AD86C7D62EFFCAA8000B5A02 /* Exceptions for "deckflow-ios" folder in "deckflow-ios" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = AD43216C2EFEC737003D938B /* deckflow-ios */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		AD43216F2EFEC737003D938B /* deckflow-ios */ = {
+		ADA0616A2EFF40A8006146AE /* deckflow-ios */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AD86C7D62EFFCAA8000B5A02 /* Exceptions for "deckflow-ios" folder in "deckflow-ios" target */,
+			);
 			path = "deckflow-ios";
 			sourceTree = "<group>";
 		};
@@ -23,6 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA061522EFF36B5006146AE /* FirebaseAuth in Frameworks */,
+				AD86C7D22EFFCA02000B5A02 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,8 +69,10 @@
 		AD4321642EFEC737003D938B = {
 			isa = PBXGroup;
 			children = (
-				AD43216F2EFEC737003D938B /* deckflow-ios */,
+				ADA061562EFF370E006146AE /* .gitignore */,
+				ADA0614E2EFF35CD006146AE /* GoogleService-Info.plist */,
 				AD43216E2EFEC737003D938B /* Products */,
+				ADA0616A2EFF40A8006146AE /* deckflow-ios */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,16 +94,19 @@
 				AD4321692EFEC737003D938B /* Sources */,
 				AD43216A2EFEC737003D938B /* Frameworks */,
 				AD43216B2EFEC737003D938B /* Resources */,
+				AD86C7E12EFFD06F000B5A02 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				AD43216F2EFEC737003D938B /* deckflow-ios */,
+				ADA0616A2EFF40A8006146AE /* deckflow-ios */,
 			);
 			name = "deckflow-ios";
 			packageProductDependencies = (
+				ADA061512EFF36B5006146AE /* FirebaseAuth */,
+				AD86C7D12EFFCA02000B5A02 /* Alamofire */,
 			);
 			productName = "deckflow-ios";
 			productReference = AD43216D2EFEC737003D938B /* deckflow-ios.app */;
@@ -86,14 +128,19 @@
 				};
 			};
 			buildConfigurationList = AD4321682EFEC737003D938B /* Build configuration list for PBXProject "deckflow-ios" */;
-			developmentRegion = en;
+			developmentRegion = ja;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = AD4321642EFEC737003D938B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				ADA061502EFF36B5006146AE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				AD86C7D02EFFCA02000B5A02 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AD43216E2EFEC737003D938B /* Products */;
 			projectDirPath = "";
@@ -109,6 +156,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA061572EFF3718006146AE /* .gitignore in Resources */,
+				ADA0614F2EFF35CD006146AE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +302,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "deckflow-ios/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -284,6 +334,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "deckflow-ios/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -316,7 +367,7 @@
 				AD4321772EFEC738003D938B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		AD4321782EFEC738003D938B /* Build configuration list for PBXNativeTarget "deckflow-ios" */ = {
 			isa = XCConfigurationList;
@@ -325,9 +376,41 @@
 				AD43217A2EFEC738003D938B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AD86C7D02EFFCA02000B5A02 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.0;
+			};
+		};
+		ADA061502EFF36B5006146AE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AD86C7D12EFFCA02000B5A02 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD86C7D02EFFCA02000B5A02 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		ADA061512EFF36B5006146AE /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADA061502EFF36B5006146AE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AD4321652EFEC737003D938B /* Project object */;
 }
