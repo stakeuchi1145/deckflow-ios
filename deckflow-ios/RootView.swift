@@ -12,11 +12,15 @@ struct RootView: View {
     
     var body: some View {
         NavigationStack(path: $path) {
-            LoginScreenView() { route in
+            LaunchAppView() { route in
                 path = [route]
             }
             .navigationDestination(for: Route.self) { route in
                 switch route {
+                case .login:
+                    LoginScreenView() { route in
+                        path = [route]
+                    }
                 case .home:
                     HomeScreenView()
                 default:

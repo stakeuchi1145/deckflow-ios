@@ -30,13 +30,11 @@ class LoginViewModel: ObservableObject {
     func login() async throws -> Bool {
         do {
             let token = try await loginRepository.login(email: userId, password: password)
-            debugPrint("token: \(user.token)")
 
-            if token.isEmpty { return false }
+            guard !token.isEmpty else { return false }
 
-            let displayName = try await loginRepository.getUser(token: token)
             user.token = token
-            user.displayName = displayName
+            debugPrint("token: \(user.token)")
 
             return true
         } catch {

@@ -20,6 +20,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 enum Route {
     case login
     case home
+    case unknown
 }
 
 @main

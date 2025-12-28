@@ -77,10 +77,8 @@ struct HomeScreenView: View {
                             ScrollView([.vertical]) {
                                 LazyVStack {
                                     ForEach(viewModel.cards, id: \.self) { card in
-                                        let url = "https://minio.deckflow.stakeuchi.work/\(card.imageURL)"
-
                                         HStack {
-                                            AsyncImage(url: URL(string: url)) { phase in
+                                            AsyncImage(url: URL(string: card.imageURL)) { phase in
                                                 switch phase {
                                                 case .empty:
                                                     // 取得中（ローディング）
@@ -201,7 +199,9 @@ struct HomeScreenView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .task {
             Task {
+                isLoading = true
                 try await viewModel.getMyCards()
+                isLoading = false
             }
         }
     }

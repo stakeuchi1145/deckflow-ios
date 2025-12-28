@@ -25,7 +25,7 @@ class HomeViewModel: ObservableObject {
     private let env = ProcessInfo.processInfo.environment
 
     private func baseURLString() throws -> String {
-        guard let value = env["BASE_API_URL"],
+        guard let value = env["BASE_IMAGE_URL"],
               !value.isEmpty else {
             throw AppConfigError.missingBaseURL
         }
