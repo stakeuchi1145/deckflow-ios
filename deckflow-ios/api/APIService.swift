@@ -23,22 +23,51 @@ final class APIService {
     }
 
     func getUserInfo(token: String) async throws -> GetLoginResponse {
+        let baseUrl = try getBaseURL()
+        let url = "\(baseUrl)/me"
+
+        let request = AF.request(
+            url,
+            method: .get,
+            headers: getHeaders(token: token)
+        )
+        .validate(statusCode: 200..<300)
+
+        let data = try await connectServer(request: request)
+        return try decoder.decode(GetLoginResponse.self, from: data)
+    }
+
+    func getUserCards(token: String) async throws -> [MyCard] {
+        let baseUrl = try getBaseURL()
+        let url = "\(baseUrl)/me/cards"
+
+        let request = AF.request(
+            url,
+            method: .get,
+            headers: getHeaders(token: token)
+        )
+        .validate(statusCode: 200..<300)
+
+        let data = try await connectServer(request: request)
+        return try decoder.decode(GetMyCardsResponse.self, from: data).myCards
+    }
+
+    private func getHeaders(token: String) -> HTTPHeaders {
+        ["Authorization": "Bearer \(token)"]
+    }
+    
+    private func getBaseURL() throws -> String {
         do {
-            let baseURL = try baseURLString()
-            let url = "\(baseURL)/me"
-
-            let request = AF.request(
-                url,
-                method: .get,
-                headers: getHeaders(token: token)
-            )
-            .validate(statusCode: 200..<300)
-
-            let data = try await request.serializingData().value
-            return try decoder.decode(GetLoginResponse.self, from: data)
-        } catch let _ as AppConfigError {
-            // baseURL の取得失敗など
-            throw APIError.invalidConfiguration
+            return try baseURLString()
+        } catch {
+            debugPrint(error)
+            throw error
+        }
+    }
+    
+    private func connectServer(request: DataRequest) async throws -> Data {
+        do {
+            return try await request.serializingData().value
         } catch let afError as AFError {
             // HTTP ステータスでの失敗などを取り出したい場合
             if case let .responseValidationFailed(reason) = afError,
@@ -53,10 +82,6 @@ final class APIService {
         } catch {
             throw APIError.unknown(error)
         }
-    }
-
-    private func getHeaders(token: String) -> HTTPHeaders {
-        ["Authorization": "Bearer \(token)"]
     }
 }
 

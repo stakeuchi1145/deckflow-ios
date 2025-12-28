@@ -11,6 +11,7 @@ struct HomeScreenView: View {
     @ObservedObject private var viewModel = HomeViewModel.shared
 
     @State var searchCardText: String = ""
+    @State var isLoading: Bool = false
 
     var body: some View {
         ZStack {
@@ -182,9 +183,27 @@ struct HomeScreenView: View {
                     }
                 }
             }
+
+            if isLoading {
+                ZStack {
+                    VStack {
+                        ProgressView()
+                            .tint(.white)
+                            .scaleEffect(4.0)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .center)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                .background(.gray.opacity(0.4))
+            }
         }
         .navigationBarBackButtonHidden(true)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .task {
+            Task {
+                try await viewModel.getMyCards()
+            }
+        }
     }
 }
 

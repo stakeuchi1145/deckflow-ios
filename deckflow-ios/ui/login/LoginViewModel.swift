@@ -11,7 +11,9 @@ import Combine
 class LoginViewModel: ObservableObject {
     static let shared = LoginViewModel()
     
-    let loginRepository = LoginRepository.shared
+    private let loginRepository = LoginRepository.shared
+    private let user = User.shared
+
     @Published var userId: String = ""
     @Published var password: String = ""
     @Published var passHidden: Bool = true
@@ -28,12 +30,15 @@ class LoginViewModel: ObservableObject {
     func login() async throws -> Bool {
         do {
             let token = try await loginRepository.login(email: userId, password: password)
-            debugPrint("token: \(token)")
+            debugPrint("token: \(user.token)")
+
+            if token.isEmpty { return false }
 
             let displayName = try await loginRepository.getUser(token: token)
-            debugPrint("displayName: \(displayName)")
+            user.token = token
+            user.displayName = displayName
 
-            return !token.isEmpty
+            return true
         } catch {
             debugPrint(error)
         }
