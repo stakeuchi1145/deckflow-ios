@@ -7,18 +7,17 @@
 
 import Foundation
 
-class User {
+actor User {
     static let shared = User()
     private let queue = DispatchQueue(label: "com.deckflow.user", attributes: .concurrent)
-    private var _token: String = ""
-    private var _displayName: String = ""
-
-    var token: String {
-        get { queue.sync { _token }}
-        set { queue.async(flags: .barrier) { self._token = newValue } }
+    private var token: String = ""
+    private var displayName: String = ""
+    
+    func setToken(token: String) {
+        self.token = token
     }
-    var displayName: String {
-        get { queue.sync { _displayName }}
-        set { queue.sync(flags: .barrier) { self._displayName = newValue } }
+
+    func getToken() -> String {
+        return self.token
     }
 }

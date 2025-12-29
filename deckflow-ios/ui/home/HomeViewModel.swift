@@ -38,9 +38,10 @@ class HomeViewModel: ObservableObject {
         do {
             cards.removeAll()
             let imageUrl = try baseURLString()
-            guard !user.token.isEmpty, !imageUrl.isEmpty else { return false }
+            let token = await user.getToken()
+            guard !token.isEmpty, !imageUrl.isEmpty else { return false }
 
-            let myCards = try await mycardRepository.getMyCards(token: user.token)
+            let myCards = try await mycardRepository.getMyCards(token: token)
             myCards.forEach { card in
                 cards.append(
                     Card(

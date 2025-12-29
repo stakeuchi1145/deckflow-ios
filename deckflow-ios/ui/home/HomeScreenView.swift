@@ -200,7 +200,7 @@ struct HomeScreenView: View {
         .task {
             Task {
                 isLoading = true
-                try await viewModel.getMyCards()
+                let _ = try await viewModel.getMyCards()
                 isLoading = false
             }
         }

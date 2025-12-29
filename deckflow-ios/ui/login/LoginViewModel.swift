@@ -33,8 +33,8 @@ class LoginViewModel: ObservableObject {
 
             guard !token.isEmpty else { return false }
 
-            user.token = token
-            debugPrint("token: \(user.token)")
+            await user.setToken(token: token)
+            debugPrint("token: \(await user.getToken())")
 
             return true
         } catch {

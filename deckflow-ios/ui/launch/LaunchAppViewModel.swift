@@ -19,7 +19,9 @@ class LaunchAppViewModel: ObservableObject {
             let token = try await userRepository.getCurrentUser()
             guard !token.isEmpty else { return false }
 
-            user.token = token
+            await user.setToken(token: token)
+            debugPrint("token: \(await user.getToken())")
+
             return true
         } catch {
             debugPrint(error)
