@@ -145,7 +145,7 @@ struct LoginScreenView: View {
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .padding()
-                        .background(viewModel.isLogin ? Color(hex: "FF2196F3") : .gray)
+                        .background(viewModel.isLogin ? Color(hex: "#FF2196F3") : .gray)
                         .cornerRadius(8)
                 }
                 .disabled(!viewModel.isLogin)

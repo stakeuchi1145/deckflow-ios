@@ -17,7 +17,12 @@ class LoginRepository {
         
         return try await result.user.getIDTokenResult().token
     }
-    
+
+    func getCurrentUser() async throws -> String {
+        guard let currentUser = Auth.auth().currentUser else { return "" }
+        return try await currentUser.getIDToken()
+    }
+
     func getUser(token: String) async throws -> String {
         return try await apiService.getUserInfo(token: token).displayName
     }
