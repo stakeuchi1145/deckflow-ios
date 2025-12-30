@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HomeScreenView: View {
     let onNavigate: (Route) -> Void
 
     @ObservedObject private var viewModel = HomeViewModel.shared
+
+    @Environment(\.modelContext) private var context
+    @Query private var cards: [MyCard]
 
     @State var searchCardText: String = ""
     @State var isLoading: Bool = false
@@ -72,13 +76,13 @@ struct HomeScreenView: View {
 
                     VStack {
 
-                        if viewModel.cards.isEmpty {
+                        if cards.isEmpty {
                             Text("カードが見つかりません。")
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                         } else {
                             ScrollView([.vertical]) {
                                 LazyVStack {
-                                    ForEach(viewModel.cards, id: \.self) { card in
+                                    ForEach(cards) { card in
                                         HStack {
                                             AsyncImage(url: URL(string: card.imageURL)) { phase in
                                                 switch phase {
@@ -204,7 +208,7 @@ struct HomeScreenView: View {
         .task {
             Task {
                 isLoading = true
-                let _ = try await viewModel.getMyCards()
+                let _ = try await viewModel.getMyCards(context: context)
                 isLoading = false
             }
         }
@@ -212,5 +216,5 @@ struct HomeScreenView: View {
 }
 
 #Preview {
-    HomeScreenView() { route in}
+    HomeScreenView(onNavigate: {route in})
 }

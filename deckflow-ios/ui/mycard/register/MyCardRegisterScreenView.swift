@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MyCardRegisterScreenView: View {
     let cardId: Int?
@@ -13,6 +14,8 @@ struct MyCardRegisterScreenView: View {
     let onBack: () -> Void
     
     @State var quantity: String = ""
+
+    @Query private var cards: [MyCard]
 
     var body: some View {
         ZStack {

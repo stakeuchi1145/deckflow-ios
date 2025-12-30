@@ -37,7 +37,7 @@ final class APIService {
         return try decoder.decode(GetLoginResponse.self, from: data)
     }
 
-    func getUserCards(token: String) async throws -> [MyCard] {
+    func getUserCards(token: String) async throws -> [MyCardDTO] {
         let baseUrl = try getBaseURL()
         let url = "\(baseUrl)/me/cards"
 

@@ -8,16 +8,9 @@
 import Combine
 import Foundation
 import SwiftUI
+import SwiftData
 
-struct Card: Hashable, Identifiable {
-    let id: Int
-    let cardName: String
-    let imageURL: String
-    let packName: String
-    let rarity: String
-    let quantity: Int
-}
-
+@MainActor
 class HomeViewModel: ObservableObject {
     static let shared = HomeViewModel()
     
@@ -33,32 +26,38 @@ class HomeViewModel: ObservableObject {
         return value
     }
 
-    @Published var cards: [Card] = []
-
-    func getMyCards() async throws -> Bool {
+    func getMyCards(context: ModelContext) async throws {
         do {
-            cards.removeAll()
+            try deleteAllMyCards(context: context)
+
             let imageUrl = try baseURLString()
             let token = await user.getToken()
-            guard !token.isEmpty, !imageUrl.isEmpty else { return false }
+            guard !token.isEmpty, !imageUrl.isEmpty else { return }
 
             let myCards = try await mycardRepository.getMyCards(token: token)
+            guard !myCards.isEmpty else { return }
+
             myCards.forEach { card in
-                cards.append(
-                    Card(
-                        id: card.id,
-                        cardName: card.cardName,
-                        imageURL: "\(imageUrl)/\(card.imageURL)",
-                        packName: card.packName,
-                        rarity: "",
-                        quantity: card.quantity
-                    )
-                )
+                card.imageURL = "\(imageUrl)/\(card.imageURL)"
+                add(context: context, card: card)
             }
         } catch {
             debugPrint(error)
         }
-        
-        return !cards.isEmpty
+    }
+    
+    private func add(context: ModelContext, card: MyCard) {
+        context.insert(card)
+    }
+    
+    private func deleteAllMyCards(context: ModelContext) throws {
+        let descriptor = FetchDescriptor<MyCard>()
+        let myCards = try context.fetch(descriptor)
+
+        guard !myCards.isEmpty else {
+            return
+        }
+
+        myCards.forEach { context.delete($0) }
     }
 }

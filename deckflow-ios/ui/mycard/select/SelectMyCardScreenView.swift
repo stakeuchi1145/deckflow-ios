@@ -6,21 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SelectMyCardScreenView: View {
     let onNavigate: (Route) -> Void
     let onBack: () -> Void
 
-    @State private var cards: [Card] = [
-        Card(
-            id: 0,
-            cardName: "ピカチュウex",
-            imageURL: "card-images/sv8/033.jpg",
-            packName: "超電ブレイカー",
-            rarity: "RR",
-            quantity: 0
-        )
-    ]
+    @Query private var cards: [MyCard]
     
     @State private var imageUrl: String = ""
     private let env = ProcessInfo.processInfo.environment
@@ -123,7 +115,7 @@ struct SelectMyCardScreenView: View {
                             .cornerRadius(10)
                             .padding()
                             .onTapGesture {
-                                onNavigate(.registerMyCard(id: card.id))
+                                onNavigate(.registerMyCard(id: card.myCardId))
                             }
                         }
                     }

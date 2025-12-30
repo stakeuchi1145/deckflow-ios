@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseCore
+import SwiftData
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -33,5 +34,6 @@ struct DeckflowApp: App {
         WindowGroup {
             RootView()
         }
+        .modelContainer(for: [MyCard.self])
     }
 }
