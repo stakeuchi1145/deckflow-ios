@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeScreenView: View {
+    let onNavigate: (Route) -> Void
+
     @ObservedObject private var viewModel = HomeViewModel.shared
 
     @State var searchCardText: String = ""
@@ -143,7 +145,9 @@ struct HomeScreenView: View {
                     }
 
                     ZStack {
-                        Button(action: {}) {
+                        Button(action: {
+                            onNavigate(.registerMyCard(id: nil))
+                        }) {
                             Image(systemName: "plus")
                                 .resizable()
                                 .scaledToFit()
@@ -208,5 +212,5 @@ struct HomeScreenView: View {
 }
 
 #Preview {
-    HomeScreenView()
+    HomeScreenView() { route in}
 }

@@ -14,6 +14,7 @@ struct Card: Hashable, Identifiable {
     let cardName: String
     let imageURL: String
     let packName: String
+    let rarity: String
     let quantity: Int
 }
 
@@ -49,6 +50,7 @@ class HomeViewModel: ObservableObject {
                         cardName: card.cardName,
                         imageURL: "\(imageUrl)/\(card.imageURL)",
                         packName: card.packName,
+                        rarity: "",
                         quantity: card.quantity
                     )
                 )
