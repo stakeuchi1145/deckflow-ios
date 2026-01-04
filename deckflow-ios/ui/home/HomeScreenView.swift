@@ -19,6 +19,14 @@ struct HomeScreenView: View {
     @State var searchCardText: String = ""
     @State var isLoading: Bool = false
 
+    var filterMyCards: [MyCard] {
+        guard !searchCardText.isEmpty else {
+            return cards
+        }
+        
+        return cards.filter { $0.cardName.contains(searchCardText) }
+    }
+
     var body: some View {
         ZStack {
             VStack {
@@ -51,14 +59,6 @@ struct HomeScreenView: View {
                         .padding(.vertical, 8)
                         .background(.gray.opacity(0.2))
                         .cornerRadius(10)
-
-                        Button(action: {}) {
-                            Text("Filter")
-                                .foregroundColor(.white)
-                                .padding(10)
-                                .background(Color(hex: "#FF2196F3"))
-                                .cornerRadius(20)
-                        }
                     }
                     .padding(.bottom, 8)
 
@@ -75,14 +75,13 @@ struct HomeScreenView: View {
                     .frame(maxHeight: .infinity, alignment: .top)
 
                     VStack {
-
                         if cards.isEmpty {
                             Text("カードが見つかりません。")
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                         } else {
                             ScrollView([.vertical]) {
                                 LazyVStack {
-                                    ForEach(cards) { card in
+                                    ForEach(filterMyCards) { card in
                                         HStack {
                                             AsyncImage(url: URL(string: card.imageURL)) { phase in
                                                 switch phase {
@@ -150,7 +149,7 @@ struct HomeScreenView: View {
 
                     ZStack {
                         Button(action: {
-                            onNavigate(.registerMyCard(id: nil))
+                            onNavigate(.registerMyCard(id: ""))
                         }) {
                             Image(systemName: "plus")
                                 .resizable()
@@ -216,5 +215,5 @@ struct HomeScreenView: View {
 }
 
 #Preview {
-    HomeScreenView(onNavigate: {route in})
+    HomeScreenView() { route in}
 }

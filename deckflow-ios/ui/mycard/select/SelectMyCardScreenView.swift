@@ -12,17 +12,9 @@ struct SelectMyCardScreenView: View {
     let onNavigate: (Route) -> Void
     let onBack: () -> Void
 
-    @Query private var cards: [MyCard]
+    @Query private var cards: [Card]
     
     @State private var imageUrl: String = ""
-    private let env = ProcessInfo.processInfo.environment
-    private func baseURLString() throws -> String {
-        guard let value = env["BASE_IMAGE_URL"],
-              !value.isEmpty else {
-            throw AppConfigError.missingBaseURL
-        }
-        return value
-    }
 
     var body: some View {
         ZStack {
@@ -50,9 +42,9 @@ struct SelectMyCardScreenView: View {
 
                 ScrollView {
                     LazyVStack {
-                        ForEach(cards, id: \.self) { card in
+                        ForEach(cards) { card in
                             HStack {
-                                AsyncImage(url: URL(string: "\(imageUrl)/\(card.imageURL)")) { phase in
+                                AsyncImage(url: URL(string: "\(card.imageURL)")) { phase in
                                     switch phase {
                                     case .empty:
                                         // 取得中（ローディング）
@@ -115,7 +107,7 @@ struct SelectMyCardScreenView: View {
                             .cornerRadius(10)
                             .padding()
                             .onTapGesture {
-                                onNavigate(.registerMyCard(id: card.myCardId))
+                                onNavigate(.registerMyCard(id: ""))
                             }
                         }
                     }
@@ -126,13 +118,6 @@ struct SelectMyCardScreenView: View {
         .navigationBarBackButtonHidden(true)
         .background(Color(hex: "#FFFAFAFA"))
         .task {
-            Task {
-                do {
-                    imageUrl = try baseURLString()
-                } catch {
-                    debugPrint(error)
-                }
-            }
         }
     }
 }

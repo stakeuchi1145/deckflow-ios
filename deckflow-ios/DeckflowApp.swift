@@ -21,7 +21,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 enum Route: Hashable {
     case login
     case home
-    case registerMyCard(id: Int?)
+    case registerMyCard(id: String)
     case selectMyCard
     case unknown
 }
