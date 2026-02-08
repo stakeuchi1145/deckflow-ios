@@ -6,12 +6,26 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HomeScreenView: View {
+    let onNavigate: (Route) -> Void
+
     @ObservedObject private var viewModel = HomeViewModel.shared
+
+    @Environment(\.modelContext) private var context
+    @Query private var cards: [MyCard]
 
     @State var searchCardText: String = ""
     @State var isLoading: Bool = false
+
+    var filterMyCards: [MyCard] {
+        guard !searchCardText.isEmpty else {
+            return cards
+        }
+        
+        return cards.filter { $0.cardName.contains(searchCardText) }
+    }
 
     var body: some View {
         ZStack {
@@ -45,14 +59,6 @@ struct HomeScreenView: View {
                         .padding(.vertical, 8)
                         .background(.gray.opacity(0.2))
                         .cornerRadius(10)
-
-                        Button(action: {}) {
-                            Text("Filter")
-                                .foregroundColor(.white)
-                                .padding(10)
-                                .background(Color(hex: "#FF2196F3"))
-                                .cornerRadius(20)
-                        }
                     }
                     .padding(.bottom, 8)
 
@@ -69,14 +75,13 @@ struct HomeScreenView: View {
                     .frame(maxHeight: .infinity, alignment: .top)
 
                     VStack {
-
-                        if viewModel.cards.isEmpty {
+                        if cards.isEmpty {
                             Text("カードが見つかりません。")
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                         } else {
                             ScrollView([.vertical]) {
                                 LazyVStack {
-                                    ForEach(viewModel.cards, id: \.self) { card in
+                                    ForEach(filterMyCards) { card in
                                         HStack {
                                             AsyncImage(url: URL(string: card.imageURL)) { phase in
                                                 switch phase {
@@ -143,7 +148,9 @@ struct HomeScreenView: View {
                     }
 
                     ZStack {
-                        Button(action: {}) {
+                        Button(action: {
+                            onNavigate(.registerMyCard(id: ""))
+                        }) {
                             Image(systemName: "plus")
                                 .resizable()
                                 .scaledToFit()
@@ -200,7 +207,7 @@ struct HomeScreenView: View {
         .task {
             Task {
                 isLoading = true
-                let _ = try await viewModel.getMyCards()
+                let _ = try await viewModel.getMyCards(context: context)
                 isLoading = false
             }
         }
@@ -208,5 +215,5 @@ struct HomeScreenView: View {
 }
 
 #Preview {
-    HomeScreenView()
+    HomeScreenView() { route in}
 }

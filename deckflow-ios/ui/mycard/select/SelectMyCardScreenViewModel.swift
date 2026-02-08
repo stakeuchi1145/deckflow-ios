@@ -1,21 +1,19 @@
 //
-//  HomeViewModel.swift
+//  SelectMyCardScreenViewModel.swift
 //  deckflow-ios
 //
-//  Created by shin takeuchi on 2025/12/28.
+//  Created by shin takeuchi on 2026/01/04.
 //
 
 import Combine
 import Foundation
-import SwiftUI
 import SwiftData
 
-@MainActor
-class HomeViewModel: ObservableObject {
-    static let shared = HomeViewModel()
-    
+class SelectMyCardScreenViewModel: ObservableObject {
+    static let shared = SelectMyCardScreenViewModel()
+
     let user = User.shared
-    let mycardRepository = MyCardRepository.shared
+    let cardRepository = CardRepository.shared
     private let env = ProcessInfo.processInfo.environment
 
     private func baseURLString() throws -> String {
@@ -26,18 +24,18 @@ class HomeViewModel: ObservableObject {
         return value
     }
 
-    func getMyCards(context: ModelContext) async throws {
+    func getCards(context: ModelContext) async throws {
         do {
-            try deleteAllMyCards(context: context)
+            try deleteAllCards(context: context)
 
             let imageUrl = try baseURLString()
             let token = await user.getToken()
             guard !token.isEmpty, !imageUrl.isEmpty else { return }
 
-            let myCards = try await mycardRepository.getMyCards(token: token)
-            guard !myCards.isEmpty else { return }
+            let cards = try await cardRepository.getCards(token: token)
+            guard !cards.isEmpty else { return }
 
-            myCards.forEach { card in
+            cards.forEach { card in
                 card.imageURL = "\(imageUrl)/\(card.imageURL)"
                 add(context: context, card: card)
             }
@@ -45,20 +43,20 @@ class HomeViewModel: ObservableObject {
             debugPrint(error)
         }
     }
-    
-    private func add(context: ModelContext, card: MyCard) {
+
+    func add(context: ModelContext, card: Card) {
         context.insert(card)
     }
-    
-    private func deleteAllMyCards(context: ModelContext) throws {
-        let descriptor = FetchDescriptor<MyCard>()
-        let myCards = try context.fetch(descriptor)
 
-        guard !myCards.isEmpty else {
+    func deleteAllCards(context: ModelContext) throws {
+        let descriptor = FetchDescriptor<Card>()
+        let cards = try context.fetch(descriptor)
+
+        guard !cards.isEmpty else {
             return
         }
 
-        myCards.forEach { context.delete($0) }
+        cards.forEach { context.delete($0) }
         try context.save()
     }
 }

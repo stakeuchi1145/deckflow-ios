@@ -6,10 +6,10 @@
 //
 
 struct GetMyCardsResponse: Decodable {
-    let myCards: [MyCard]
+    let myCards: [MyCardDTO]
 }
 
-struct MyCard: Decodable {
+struct MyCardDTO: Decodable {
     let id: Int
     let cardName: String
     let imageURL: String

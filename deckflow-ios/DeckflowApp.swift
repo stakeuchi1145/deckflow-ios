@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseCore
+import SwiftData
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -17,9 +18,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
 }
 
-enum Route {
+enum Route: Hashable {
     case login
     case home
+    case registerMyCard(id: String)
+    case selectMyCard
     case unknown
 }
 
@@ -31,5 +34,6 @@ struct DeckflowApp: App {
         WindowGroup {
             RootView()
         }
+        .modelContainer(for: [MyCard.self])
     }
 }

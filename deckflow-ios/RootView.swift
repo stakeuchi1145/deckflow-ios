@@ -22,7 +22,22 @@ struct RootView: View {
                         path = [route]
                     }
                 case .home:
-                    HomeScreenView()
+                    HomeScreenView() { route in
+                        path.append(route)
+                    }
+                case .registerMyCard(let id):
+                    MyCardRegisterScreenView(cardId: id, onNavigate: {route in
+                        path.append(route)
+                    }, onBack: {
+                        path = [.home]
+                    })
+                case .selectMyCard:
+                    SelectMyCardScreenView(onNavigate: {route in
+                        path.removeLast()
+                        path.append(route)
+                    }, onBack: {
+                        path.removeLast()
+                    })
                 default:
                     EmptyView()
                 }

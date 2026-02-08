@@ -37,7 +37,7 @@ final class APIService {
         return try decoder.decode(GetLoginResponse.self, from: data)
     }
 
-    func getUserCards(token: String) async throws -> [MyCard] {
+    func getUserCards(token: String) async throws -> [MyCardDTO] {
         let baseUrl = try getBaseURL()
         let url = "\(baseUrl)/me/cards"
 
@@ -50,6 +50,21 @@ final class APIService {
 
         let data = try await connectServer(request: request)
         return try decoder.decode(GetMyCardsResponse.self, from: data).myCards
+    }
+
+    func getCards(token: String) async throws -> [CardDTO] {
+        let baseUrl = try getBaseURL()
+        let url = "\(baseUrl)/cards"
+
+        let request = AF.request(
+            url,
+            method: .get,
+            headers: getHeaders(token: token)
+        )
+        .validate(statusCode: 200..<300)
+
+        let data = try await connectServer(request: request)
+        return try decoder.decode(GetCardsResponse.self, from: data).cards
     }
 
     private func getHeaders(token: String) -> HTTPHeaders {

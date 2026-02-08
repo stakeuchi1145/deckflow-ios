@@ -174,6 +174,7 @@ struct LoginScreenView: View {
                 .background(.gray.opacity(0.4))
             }
         }
+        .navigationBarBackButtonHidden(true)
         .ignoresSafeArea()
         .background(Color(hex: "#FFFAFAFA"))
         .onTapGesture {
