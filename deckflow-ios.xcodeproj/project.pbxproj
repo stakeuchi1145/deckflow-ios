@@ -43,6 +43,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		AD3EBE782F40031C0041F071 /* .github */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = .github;
+			sourceTree = "<group>";
+		};
 		ADA0616A2EFF40A8006146AE /* deckflow-ios */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -69,6 +74,7 @@
 		AD4321642EFEC737003D938B = {
 			isa = PBXGroup;
 			children = (
+				AD3EBE782F40031C0041F071 /* .github */,
 				ADA061562EFF370E006146AE /* .gitignore */,
 				ADA0614E2EFF35CD006146AE /* GoogleService-Info.plist */,
 				AD43216E2EFEC737003D938B /* Products */,
@@ -101,6 +107,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				AD3EBE782F40031C0041F071 /* .github */,
 				ADA0616A2EFF40A8006146AE /* deckflow-ios */,
 			);
 			name = "deckflow-ios";
@@ -300,6 +307,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NZ324892XV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "deckflow-ios/Info.plist";
@@ -332,6 +340,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NZ324892XV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "deckflow-ios/Info.plist";
