@@ -15,6 +15,7 @@ class HomeViewModel: ObservableObject {
     static let shared = HomeViewModel()
     
     let user = User.shared
+    let loginRepository = LoginRepository.shared
     let mycardRepository = MyCardRepository.shared
     private let env = ProcessInfo.processInfo.environment
 
@@ -60,5 +61,10 @@ class HomeViewModel: ObservableObject {
 
         myCards.forEach { context.delete($0) }
         try context.save()
+    }
+    
+    func logout() async throws {
+        try loginRepository.logout()
+        await user.clear()
     }
 }

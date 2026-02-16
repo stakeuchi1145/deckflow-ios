@@ -20,4 +20,9 @@ actor User {
     func getToken() -> String {
         return self.token
     }
+    
+    func clear() {
+        self.token = ""
+        self.displayName = ""
+    }
 }
