@@ -26,4 +26,8 @@ class LoginRepository {
     func getUser(token: String) async throws -> String {
         return try await apiService.getUserInfo(token: token).displayName
     }
+
+    func logout() throws {
+        try Auth.auth().signOut()
+    }
 }

@@ -37,14 +37,27 @@ struct HomeScreenView: View {
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity, alignment: .leading)
 
-                        Button(action: {}) {
+                        Menu {
+                            Button(action: {
+                                Task {
+                                    do {
+                                        try await viewModel.logout()
+                                        onNavigate(.login)
+                                    } catch {
+                                        debugPrint(error)
+                                    }
+                                }
+                            }) {
+                                Text("ログアウト")
+                            }
+                        } label: {
                             Image(systemName: "line.3.horizontal")
                                 .resizable()
                                 .frame(width: 14, height: 14)
                                 .foregroundColor(.black)
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                                .padding()
                         }
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding()
                     }
                     .frame(maxWidth: .infinity)
 
